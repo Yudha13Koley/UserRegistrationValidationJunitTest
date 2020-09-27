@@ -95,15 +95,4 @@ public class UserRegistration {
 	public String toString() {
 		return "FirstName = " + firstName+" LastName = "+lastName+" Email = "+email+" Mobile No = "+mobileNo+" Password = "+password;
 	}
-
-	public static void main(String[] args) {
-		UserRegistration UR=new UserRegistration();
-		UR.setFirstName("Yudhajit");
-		UR.setLastName("Koley");
-		UR.setEmail("abc.xyz@bl.co.in");
-		UR.setMobileNo("+91 9804809458");
-		UR.setPassword("Yudhajit@123");
-		System.out.println(UR);
-	}
-
 }
