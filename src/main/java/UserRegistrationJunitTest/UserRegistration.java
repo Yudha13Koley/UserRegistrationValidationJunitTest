@@ -89,11 +89,7 @@ public class UserRegistration {
 	public boolean validateMobileNo(String Mob) throws InvalidMobileNoException {
 		try {
 			Pattern pattern1=Pattern.compile(mobileNoPattern);
-			ValidateField fn= (String string,Pattern pattern)->{
-			Matcher matcher=pattern.matcher(string);
-			 return matcher.matches();
-				};
-			return fn.isValid(Mob, pattern1);
+			return funcInteface(Mob, pattern1);
 			}
 			catch(Exception e){
 				throw new InvalidMobileNoException("Enter A Valid Mobile No !");
@@ -102,11 +98,7 @@ public class UserRegistration {
 	public boolean validateEmail(String email) throws InvalidEamil {
 		try {
 			Pattern pattern1=Pattern.compile(emailPattern);
-			ValidateField fn= (String string,Pattern pattern)->{
-			Matcher matcher=pattern.matcher(string);
-			 return matcher.matches();
-				};
-			return fn.isValid(email, pattern1);
+			return funcInteface(email, pattern1);
 			}
 			catch(Exception e){
 				throw new InvalidEamil("Enter A Valid Email !");
@@ -115,11 +107,7 @@ public class UserRegistration {
 	public boolean validateFirstName(String firstname) throws InvalidFirstName {
 		try {
 		Pattern pattern1=Pattern.compile(firstNamePattern);
-		ValidateField fn= (String string,Pattern pattern)->{
-		Matcher matcher=pattern.matcher(string);
-		 return matcher.matches();
-			};
-		return fn.isValid(firstname, pattern1);
+		return funcInteface(firstname, pattern1); 
 		}
 		catch(Exception e){
 			throw new InvalidFirstName("Enter A Valid First Name !");
@@ -128,11 +116,7 @@ public class UserRegistration {
 	public boolean validateLastName(String lastname) throws InvalidLastName {
 		try {
 			Pattern pattern1=Pattern.compile(lastNamePattern);
-			ValidateField fn= (String string,Pattern pattern)->{
-			Matcher matcher=pattern.matcher(string);
-			 return matcher.matches();
-				};
-			return fn.isValid(lastname, pattern1);
+			return funcInteface(lastname, pattern1);
 			}
 			catch(Exception e){
 				throw new InvalidLastName("Enter A Valid Last Name !");
@@ -141,16 +125,19 @@ public class UserRegistration {
 	public boolean validatePassword(String password) throws InvalidPassword {
 		try {
 			Pattern pattern1=Pattern.compile(passwordPatternRule1);
-			ValidateField fn= (String string,Pattern pattern)->{
-			Matcher matcher=pattern.matcher(string);
-			 return matcher.matches();
-				};
-			return fn.isValid(password, pattern1);
+		    return funcInteface(password, pattern1);
 			}
 			catch(Exception e){
 				throw new InvalidPassword("Enter A Valid PassWord !");
 			}
 		}
+	public boolean funcInteface(String str,Pattern p) {
+		ValidateField fn= (String string,Pattern pattern)->{
+			Matcher matcher=pattern.matcher(string);
+			 return matcher.matches();
+				};
+			return fn.isValid(str,p);
+	}
 	@Override
 	public String toString() {
 		return "FirstName = " + firstName+" LastName = "+lastName+" Email = "+email+" Mobile No = "+mobileNo+" Password = "+password;
