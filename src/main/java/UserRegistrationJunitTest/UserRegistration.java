@@ -88,30 +88,39 @@ public class UserRegistration {
 	}
 	public boolean validateMobileNo(String Mob) throws InvalidMobileNoException {
 		try {
-		Pattern pattern1=Pattern.compile(mobileNoPattern);
-		Matcher matcher=pattern1.matcher(Mob);
-		return matcher.matches();
-		}
-		catch(Exception e) {
-			throw new InvalidMobileNoException("Enter A Valid Mobile No !");
-		}
+			Pattern pattern1=Pattern.compile(mobileNoPattern);
+			ValidateField fn= (String string,Pattern pattern)->{
+			Matcher matcher=pattern.matcher(string);
+			 return matcher.matches();
+				};
+			return fn.isValid(Mob, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidMobileNoException("Enter A Valid Mobile No !");
+			}
 	}
 	public boolean validateEmail(String email) throws InvalidEamil {
 		try {
-		Pattern pattern1=Pattern.compile(emailPattern);
-		Matcher matcher=pattern1.matcher(email);
-		return matcher.matches();
+			Pattern pattern1=Pattern.compile(emailPattern);
+			ValidateField fn= (String string,Pattern pattern)->{
+			Matcher matcher=pattern.matcher(string);
+			 return matcher.matches();
+				};
+			return fn.isValid(email, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidEamil("Enter A Valid Email !");
+			}
 	}
-		catch(Exception e) {
-			throw new InvalidEamil("Enter A Valid Email !");
-		}
-	}
-	public boolean validateFirstName(String fistname) throws InvalidFirstName {
+	public boolean validateFirstName(String firstname) throws InvalidFirstName {
 		try {
 		Pattern pattern1=Pattern.compile(firstNamePattern);
-		Matcher matcher=pattern1.matcher(fistname);
-		return matcher.matches();
-			}
+		ValidateField fn= (String string,Pattern pattern)->{
+		Matcher matcher=pattern.matcher(string);
+		 return matcher.matches();
+			};
+		return fn.isValid(firstname, pattern1);
+		}
 		catch(Exception e){
 			throw new InvalidFirstName("Enter A Valid First Name !");
 		}
@@ -119,23 +128,28 @@ public class UserRegistration {
 	public boolean validateLastName(String lastname) throws InvalidLastName {
 		try {
 			Pattern pattern1=Pattern.compile(lastNamePattern);
-			Matcher matcher=pattern1.matcher(lastname);
-			return matcher.matches();
-				}
+			ValidateField fn= (String string,Pattern pattern)->{
+			Matcher matcher=pattern.matcher(string);
+			 return matcher.matches();
+				};
+			return fn.isValid(lastname, pattern1);
+			}
 			catch(Exception e){
 				throw new InvalidLastName("Enter A Valid Last Name !");
 			}
 	}
 	public boolean validatePassword(String password) throws InvalidPassword {
 		try {
-		Pattern pattern=Pattern.compile(passwordPatternRule1);
-		Matcher matcher=pattern.matcher(password);
-			return matcher.matches();
-		}
-		catch(Exception e)
-		{
-			throw new InvalidPassword("Enter A Valid Password !");
-		}
+			Pattern pattern1=Pattern.compile(passwordPatternRule1);
+			ValidateField fn= (String string,Pattern pattern)->{
+			Matcher matcher=pattern.matcher(string);
+			 return matcher.matches();
+				};
+			return fn.isValid(password, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidPassword("Enter A Valid PassWord !");
+			}
 		}
 	@Override
 	public String toString() {

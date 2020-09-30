@@ -163,7 +163,7 @@ public class UserValidationTests {
 						boolean result = UR.validatePassword(null);
 						Assert.assertEquals(true,result);
 					} catch (InvalidPassword e) {
-						Assert.assertEquals("Enter A Valid Password !",e.getMessage());
+						Assert.assertEquals("Enter A Valid PassWord !",e.getMessage());
 						System.out.println(e.getMessage());
 					}		
 				}
@@ -175,7 +175,7 @@ public class UserValidationTests {
 						boolean result = UR.validatePassword("Yudhajit@123");
 						Assert.assertEquals(true,result);
 					} catch (InvalidPassword e) {
-						Assert.assertEquals("Enter A Valid Password !",e.getMessage());
+						Assert.assertEquals("Enter A Valid PassWord !",e.getMessage());
 						System.out.println(e.getMessage());
 					}
 				}
@@ -187,7 +187,7 @@ public class UserValidationTests {
 						boolean result = UR.validatePassword("Yudhajit123");
 						Assert.assertEquals(false,result);
 					} catch (InvalidPassword e) {
-						Assert.assertEquals("Enter A Valid Password !",e.getMessage());
+						Assert.assertEquals("Enter A Valid PassWord !",e.getMessage());
 						System.out.println(e.getMessage());
 					}
 				}
