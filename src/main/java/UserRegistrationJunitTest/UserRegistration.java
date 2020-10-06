@@ -20,20 +20,28 @@ public class UserRegistration {
 	}
 
 	public void setPassword(String password) {
-		if(this.validatePassword(password))
-			this.password=password;
-			else
-				System.out.println("Password is Invalid !");
+		try {
+			if(this.validatePassword(password))
+				this.password=password;
+				else
+					System.out.println("Password is Invalid !");
+		} catch (InvalidPassword e) {
+		System.out.println(e.getMessage());
+		}
 	}
 	public String getMobileNo() {
 		return mobileNo;
 	}
 
 	public void setMobileNo(String mobileNo) {
-		if(this.validateMobileNo(mobileNo))
-			this.mobileNo = mobileNo;
-			else
-				System.out.println("Mobile Number is Invalid !");
+		try {
+			if(this.validateMobileNo(mobileNo))
+				this.mobileNo = mobileNo;
+				else
+					System.out.println("Mobile Number is Invalid !");
+		} catch (InvalidMobileNoException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public String getEmail() {
@@ -41,55 +49,94 @@ public class UserRegistration {
 	}
 
 	public void setEmail(String email) {
-		if(this.validateEmail(email))
-			this.email = email;
-			else
-				System.out.println("Email is Invalid !");
+		try {
+			if(this.validateEmail(email))
+				this.email = email;
+				else
+					System.out.println("Email is Invalid !");
+		} catch (InvalidEamil e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	public String getLastName() {
 		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		if(this.validateLastName(lastName))
-			this.lastName = lastName;
-			else
-				System.out.println("Last Name is Invalid !");
+		try {
+			if(this.validateLastName(lastName))
+				this.lastName = lastName;
+				else
+					System.out.println("Last Name is Invalid !");
+		} catch (InvalidLastName e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
-		if(this.validateFirstName(firstName))
-		this.firstName = firstName;
-		else
-			System.out.println("First Name is Invalid !");
+		try {
+			if(this.validateFirstName(firstName))
+			this.firstName = firstName;
+			else
+				System.out.println("First Name is Invalid !");
+		} catch (InvalidFirstName e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	public boolean validateMobileNo(String Mob) {
-		Pattern pattern1=Pattern.compile(mobileNoPattern);
-		Matcher matcher=pattern1.matcher(Mob);
-		return matcher.matches();
+	public boolean validateMobileNo(String Mob) throws InvalidMobileNoException {
+		try {
+			Pattern pattern1=Pattern.compile(mobileNoPattern);
+			return funcInteface(Mob, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidMobileNoException("Enter A Valid Mobile No !");
+			}
 	}
-	public boolean validateEmail(String email) {
-		Pattern pattern1=Pattern.compile(emailPattern);
-		Matcher matcher=pattern1.matcher(email);
-		return matcher.matches();
+	public boolean validateEmail(String email) throws InvalidEamil {
+		try {
+			Pattern pattern1=Pattern.compile(emailPattern);
+			return funcInteface(email, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidEamil("Enter A Valid Email !");
+			}
 	}
-	public boolean validateFirstName(String fistname) {
+	public boolean validateFirstName(String firstname) throws InvalidFirstName {
+		try {
 		Pattern pattern1=Pattern.compile(firstNamePattern);
-		Matcher matcher=pattern1.matcher(fistname);
-		return matcher.matches();
+		return funcInteface(firstname, pattern1); 
+		}
+		catch(Exception e){
+			throw new InvalidFirstName("Enter A Valid First Name !");
+		}
 	}
-	public boolean validateLastName(String lastname) {
-		Pattern pattern2=Pattern.compile(lastNamePattern);
-		Matcher matcher=pattern2.matcher(lastname);
-		return matcher.matches();
+	public boolean validateLastName(String lastname) throws InvalidLastName {
+		try {
+			Pattern pattern1=Pattern.compile(lastNamePattern);
+			return funcInteface(lastname, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidLastName("Enter A Valid Last Name !");
+			}
 	}
-	public boolean validatePassword(String password) {
-		Pattern pattern=Pattern.compile(passwordPatternRule1);
-		Matcher matcher=pattern.matcher(password);
-			return matcher.matches();
+	public boolean validatePassword(String password) throws InvalidPassword {
+		try {
+			Pattern pattern1=Pattern.compile(passwordPatternRule1);
+		    return funcInteface(password, pattern1);
+			}
+			catch(Exception e){
+				throw new InvalidPassword("Enter A Valid PassWord !");
+			}
+		}
+	public boolean funcInteface(String str,Pattern p) {
+		ValidateField fn= (String string,Pattern pattern)->{
+			Matcher matcher=pattern.matcher(string);
+			 return matcher.matches();
+				};
+			return fn.isValid(str,p);
 	}
 	@Override
 	public String toString() {
